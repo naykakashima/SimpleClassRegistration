@@ -1,2 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
+
+
+namespace ClassRegistration.ConsoleApplication
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+
+        }
+    }
+}
