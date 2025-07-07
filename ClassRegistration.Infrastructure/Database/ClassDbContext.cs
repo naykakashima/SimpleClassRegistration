@@ -22,14 +22,16 @@ namespace ClassRegistration.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Class>()
-                .HasMany(c => c.EnrolledStudents)
-                .WithMany();
+            modelBuilder.Entity<Class>().ToTable("Classes");
+            modelBuilder.Entity<Class>().HasKey(c => c.ClassID);
 
-            modelBuilder.Entity<Student>()
-                .HasMany(s => s.EnrolledClasses)
-                .WithMany(c => c.EnrolledStudents);
-        }
+            modelBuilder.Entity<Student>().ToTable("Students");
+            modelBuilder.Entity<Student>().HasKey(s => s.StudentId);
+
+             modelBuilder.Entity<Class>()
+                .HasMany(c => c.EnrolledStudents)
+                .WithMany(s => s.EnrolledClasses);
+            }
 
 
     }
