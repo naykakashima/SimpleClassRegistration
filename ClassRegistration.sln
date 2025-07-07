@@ -25,6 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassRegistration.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassRegistration.Presentation.ConsoleApplication", "ClassRegistration.Presentation\ClassRegistration.Presentation.ConsoleApplication.csproj", "{9520E765-AE59-2ED9-C54E-BC637B1F8E62}"
 	ProjectSection(ProjectDependencies) = postProject
+		{53B56C11-5DAC-48CE-A105-D892587D5011} = {53B56C11-5DAC-48CE-A105-D892587D5011}
 		{8A773A95-B3F7-40EF-8B4B-44871897C1AB} = {8A773A95-B3F7-40EF-8B4B-44871897C1AB}
 	EndProjectSection
 EndProject

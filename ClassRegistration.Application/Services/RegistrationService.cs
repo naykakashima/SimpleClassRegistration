@@ -1,11 +1,13 @@
-﻿using ClassRegistration.Infrastructure.Repositories;
-using ClassRegistration.Infrastructure.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using ClassRegistration.Application.Interfaces;
 using ClassRegistration.Domain.Models;
+using ClassRegistration.Infrastructure.Interfaces;
+using ClassRegistration.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ClassRegistration.Application.Services
 {
-    public class RegistrationService
+    public class RegistrationService  : IRegistrationService
     {
         private IClassRepository _classRepository;
         private IStudentRepository _studentRepository;
@@ -26,6 +28,12 @@ namespace ClassRegistration.Application.Services
             await _classRepository.AddAsync(new Class(ClassName, ClassType, MaxOccupancy));
             return (true, "Class Successfully Added");
 
+        }
+
+        public async Task<(bool Success, string Message)>AddStudent(string StudentName)
+        {
+            await _studentRepository.AddStudentAsync(new Student(StudentName));
+            return (true, "Student Succesfully Added");
         }
 
         public async Task<(bool Success, string Message)> AddStudentToClass(string ClassName,  string StudentName)

@@ -13,6 +13,7 @@ namespace ClassRegistration.Application.Interfaces
         Task<(bool Success, string Message)> AddStudentToClass(string ClassName, string StudentName);
         Task<(bool Success, string Message)> RemoveStudentFromClass(string ClassName, string StudentName);
         Task<List<Class>> StudentEnrolledInClasses(string StudentName);
+        Task<(bool Success, string Message)> AddStudent(string StudentName);
         Task<IEnumerable<Class>> GetAvailableClasses();
 
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClassRegistration.Application.Interfaces;
+﻿using ClassRegistration.Application.Interfaces;
 using ClassRegistration.ConsoleApplication.Helpers;
 
 
@@ -33,7 +28,8 @@ namespace ClassRegistration.ConsoleApplication
                 Console.WriteLine("3. Remove student from a class");
                 Console.WriteLine("4. See which class a student is enrolled to");
                 Console.WriteLine("5. Display available classes");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Register a student");
+                Console.WriteLine("7. Exit");
                 Console.WriteLine("Type in the number of what you want to do: ");
                 Console.WriteLine("+------------------------------------------+");
 
@@ -100,6 +96,10 @@ namespace ClassRegistration.ConsoleApplication
 
                         case 5:
                             var alllists = await _registrationService.GetAvailableClasses();
+                            if ( alllists == null)
+                            {
+                                Console.WriteLine("There are no available classes");
+                            }
                             foreach (var list in alllists)
                             {
                                 Console.WriteLine("Class name: " + list.ClassName);
@@ -110,10 +110,21 @@ namespace ClassRegistration.ConsoleApplication
                             break;
 
                         case 6:
-                            Console.WriteLine("Goodbye!");
-                            Thread.Sleep(1000);
-                            return;
+                        var inputstudentname = userInput.PromptUserInput("Enter the name of the student: ");
+
+                        actionOutcome = await _registrationService.AddStudent(inputstudentname);
+
+                        Console.WriteLine(actionOutcome.Message);
+                        
+                        break;
+
+
+                            case 7:
+                                Console.WriteLine("Goodbye!");
+                                Thread.Sleep(1000);
+                                return;
                     }
+
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
             }

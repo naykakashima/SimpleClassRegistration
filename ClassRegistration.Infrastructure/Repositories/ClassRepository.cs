@@ -34,8 +34,8 @@ namespace ClassRegistration.Infrastructure.Repositories
 
         public async Task<IEnumerable<Class>> GetAvailableClassesAsync()
         {
-            var availableClasses = await _context.Set<Class>().Select(c => c.IsClassFull == true).ToListAsync();
-            return (IEnumerable<Class>)availableClasses;
+            var availableClasses = await _context.Set<Class>().Where(c => c.IsClassFull == false).ToListAsync();
+            return availableClasses;
         }
 
         public async Task SaveChangesAsync()
