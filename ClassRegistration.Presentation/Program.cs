@@ -31,6 +31,7 @@ namespace ClassRegistration.ConsoleApplication
 
 
             var menu = host.Services.GetRequiredService<Menu>();
+            
             await menu.ShowMenu();
             await host.RunAsync();
 

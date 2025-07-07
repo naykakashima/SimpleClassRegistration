@@ -57,9 +57,9 @@ namespace ClassRegistration.ConsoleApplication
 
                         case 2:
                             var studentname = userInput.PromptUserInput("Enter the name of your student: ");
-                            var classnameinput = userInput.PromptUserInput("Enter the type of class you want to register: ");
+                            var classnameinput = userInput.PromptUserInput("Enter the name of class you want to register: ");
 
-                            actionOutcome = await _registrationService.AddStudentToClass(studentname, classnameinput);
+                            actionOutcome = await _registrationService.AddStudentToClass(classnameinput, studentname);
 
                             Console.WriteLine(actionOutcome.Message);
                             break;
@@ -68,7 +68,7 @@ namespace ClassRegistration.ConsoleApplication
                             var studentnameinput = userInput.PromptUserInput("Enter the name of your student: ");
                             var classnameinputremove = userInput.PromptUserInput("Enter the type of class you want to deregister: ");
 
-                            actionOutcome = await _registrationService.RemoveStudentFromClass(studentnameinput, classnameinputremove);
+                            actionOutcome = await _registrationService.RemoveStudentFromClass(classnameinputremove, studentnameinput);
 
                             Console.WriteLine(actionOutcome.Message);
 
@@ -78,9 +78,10 @@ namespace ClassRegistration.ConsoleApplication
                             var studentnamecheck = userInput.PromptUserInput("Enter the name of your student: ");
                             var outcomelists = await _registrationService.StudentEnrolledInClasses(studentnamecheck);
 
-                            if (outcomelists.Count == 0)
+                            if (outcomelists == null)
                             {
                                 Console.WriteLine("Student hasn't signed up to any classes");
+                            break;
                             }
 
                             foreach (var list in outcomelists)
@@ -93,6 +94,7 @@ namespace ClassRegistration.ConsoleApplication
                             }
 
                             break;
+
 
                         case 5:
                             var alllists = await _registrationService.GetAvailableClasses();
