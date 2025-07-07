@@ -3,7 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.6" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ClassRegistration.Infrastructure\ClassRegistration.Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

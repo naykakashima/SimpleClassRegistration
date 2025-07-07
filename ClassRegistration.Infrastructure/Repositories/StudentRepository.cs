@@ -31,7 +31,5 @@ namespace ClassRegistration.Infrastructure.Repositories
             return await _context.Set<Student>().FirstOrDefaultAsync(s => s.StudentName.ToLower() == studentName.ToLower());
         }
 
-
-
     }
 }

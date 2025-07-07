@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassRegistration.Infrastructure.Interfaces
 {
-    internal interface IStudentRepository
+    public interface IStudentRepository
     {
         Task AddStudentAsync(Student student);
         Task<Student?> FindStudentByNameAsync(string studentName);

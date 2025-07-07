@@ -2,6 +2,7 @@
 using ClassRegistration.Infrastructure.Database;
 using ClassRegistration.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 
 namespace ClassRegistration.Infrastructure.Repositories
@@ -23,12 +24,18 @@ namespace ClassRegistration.Infrastructure.Repositories
 
         public async Task<Class?> FindClassByTitle(string title)
         {
-            return await _context.Set<Class>().FirstOrDefaultAsync(b => b.ClassName.ToLower() == title.ToLower());
+            return await _context.Set<Class>().FirstOrDefaultAsync(c => c.ClassName.ToLower() == title.ToLower());
         }
 
         public async Task<IEnumerable<Class>> GetClassesAsync()
         {
             return await _context.Set<Class>().ToListAsync();
+        }
+
+        public async Task<IEnumerable<Class>> GetAvailableClassesAsync()
+        {
+            var availableClasses = await _context.Set<Class>().Select(c => c.IsClassFull == true).ToListAsync();
+            return (IEnumerable<Class>)availableClasses;
         }
 
         public async Task SaveChangesAsync()
@@ -40,7 +47,7 @@ namespace ClassRegistration.Infrastructure.Repositories
                 Guid? ClassID = null,
                 string? ClassName = null,
                 string? ClassType = null,
-                int? MaxOccupancy = null 
+                int? Occupancy = null 
             )
         {
 
@@ -64,8 +71,8 @@ namespace ClassRegistration.Infrastructure.Repositories
             if (ClassType !=  null)
                 @class.ClassType = ClassType;
 
-            if (MaxOccupancy.HasValue)
-                @class.MaxOccupancy = MaxOccupancy.Value;
+            if (Occupancy.HasValue)
+                @class.Occupancy = Occupancy.Value;
 
             await _context.SaveChangesAsync();
             return true;
@@ -83,15 +90,6 @@ namespace ClassRegistration.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

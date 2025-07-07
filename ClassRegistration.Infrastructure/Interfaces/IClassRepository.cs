@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassRegistration.Infrastructure.Interfaces
 {
-    internal interface IClassRepository
+    public interface IClassRepository
     {
         Task AddAsync(Class @class);
         Task<Class?> FindClassByTitle(string title);
@@ -21,5 +21,6 @@ namespace ClassRegistration.Infrastructure.Interfaces
             );
 
         Task<bool> DeleteClassAsync(string ClassName, string ClassType, Guid ClassID, int MaxOccupancy);
+        Task<IEnumerable<Class>> GetAvailableClassesAsync();
     }
 }
