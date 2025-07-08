@@ -55,7 +55,7 @@ namespace ClassRegistration.Application.Services
                 return (false, "Class Is Full!");
             }
 
-            if (@class.EnrolledStudents.Any(s => s.StudentId == student.StudentId))
+            if (@class.EnrolledStudents.Any(s => s.StudentId != student.StudentId))
                 return (false, "Student already enrolled");
 
             @class.EnrolledStudents.Add(student);
